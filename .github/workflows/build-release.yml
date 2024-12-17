@@ -76,12 +76,6 @@ jobs:
             ./install-pear-nozlib.phar.sha512
           if-no-files-found: error
       -
-        name: gh auth
-        if: github.event_name == 'release'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh auth login
-      -
         name: Attach release assets
         if: github.event_name == 'release'
         env:
