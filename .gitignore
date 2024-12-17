@@ -1,4 +1,5 @@
 # release building
+/go-pear-tarballs/
 .tarballs
 *.phar
 *.tgz

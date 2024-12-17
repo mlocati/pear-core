@@ -1,0 +1,37 @@
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-release:
+    name: Build Release
+    runs-on: ubuntu-latest
+
+    steps:
+      -
+        uses: actions/checkout@v4
+        name: Checkout repository
+      -
+        name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "5.4"
+          coverage: none
+      -
+        name: Install PEAR
+        run: |
+          apt-get install -qy php-pear
+          pear list
+          pear channel-update pear
+          pear upgrade -f pear
+          pear list
+          pear config-show
+          php -m
+      -
+        name: PEAR info
+        run: |
+          pear list
+          pear config-show
+      -
+        name: Build release
+        run: ./build-release.sh
